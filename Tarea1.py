@@ -90,32 +90,56 @@ def multiplicaMatrices(A,B,m,n,p):
     M = []
     for w in range(0,p):
         M.append(ceros)
+        
+        
     for x in range(0,m):
         for y in range(0,p):
-
-            #CASOS ESPECIALES: M=1 N=1 P=1
-            
-            
-            if m!=1 :
-                lista1 = [A[x[j]] for j in range(0,n)]
-            else:
-                lista1 = [A[j] for j in range(0,n)]
-            
-            if n!=1:
-                print("n")
-            else:
-                lista2 = [B[y[k]] for k in range(0,p)]
+            lista1 = []
+            lista2 = []
+            for h in range(0,n):
+                if type(A[x]) == int:
+                    lista1.append(A[x])
+                else:
+                    lista1.append(A[x][h])
+                if type(B[x]) == int:
+                    lista2.append(B[y])
+                else:
+                    lista2.append(B[y][h])
             #con lista1 la fila(horizontal) y lista2 la columna(vertical)
-            M[x[y]] = productoPunto(lista1, lista2)
+            M[y][x] = productoPunto(lista1, lista2)
     return M
 
-
+def imprimeMatriz(M, m, n):
+    #metodo que imprime matriz de m x n
+    for j in range(0,m):
+        for i in range(0,n):
+            if i == 0:
+                if type(M[i])!=int:
+                    print(M[i][j] ," - ", end=""  )
+                else:
+                    print(M[i] ," - ", end=""  )
+            elif i == n-1:
+                if type(M[i])!=int:
+                    print(M[i][j])
+                else:
+                    print(M[i])
+            else:
+                if type(M[i])!=int:
+                    print(M[i][j], "- ", end="" )
+                else:
+                    print(M[i], "- ", end="" )
+        
+    return
 A = [1,2,3]
 
-B = [[1,2,3],[4,5,6]]
+B = [[1,15,0],[2,27,200]]
 
+m = 1
+n = len(A)
+p = len(B)
 
-M = multiplicaMatrices(A,B,1,3,2)
+M = multiplicaMatrices(A,B,m,n,p)
 
-
-
+imprimeMatriz(M,m,p)
+print(" ")
+imprimeMatriz(B,3,2)
